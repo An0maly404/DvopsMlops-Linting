@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -e
+
+# Run checks from repo root regardless of hook invocation directory.
+hook_dir="${0%/*}"
+cd "$hook_dir/../.."
+
+echo "Running ruff..."
+python -m ruff check app.py
+echo "Running tests..."
+python -m pytest
+echo "All checks passed. Proceeding with push."
